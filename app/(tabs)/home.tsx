@@ -1,11 +1,18 @@
-import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { Text, View } from "@/components/Themed";
-import { SplashScreen } from "expo-router";
+import { Link, SplashScreen, router, useNavigation } from "expo-router";
 import { useCallback, useEffect } from "react";
 import { useFonts } from "expo-font";
 import Colors from "@/constants/Colors";
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+
   const [fontsLoaded, fontError] = useFonts({
     "Quicksand-Regular": require("../../assets/fonts/Quicksand-Regular.ttf"),
     "BigShouldersText-Regular": require("../../assets/fonts/BigShouldersText-Regular.ttf"),
@@ -21,18 +28,28 @@ export default function HomeScreen() {
     return null;
   }
 
+  const navigateTo = (route: string) => {
+    router.navigate(route);
+  };
+
+  const navigateToProjects = (route: string, projectType: string) => {
+    router.navigate({ pathname: route, params: { projectType: projectType } });
+  };
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}> Acesso rápido </Text>
       <View style={styles.gridWrapper}>
         <TouchableOpacity
           style={[styles.gridItem, { backgroundColor: Colors.pastel.green }]}
+          onPress={() => navigateToProjects("/projects", "Ativos")}
         >
           <Text style={styles.itemText}> PROJETOS ATIVOS </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.gridItem, { backgroundColor: Colors.pastel.pink }]}
+          onPress={() => navigateTo("/forms")}
         >
           <Text style={styles.itemText}> FORMULÁRIOS </Text>
         </TouchableOpacity>
@@ -41,12 +58,14 @@ export default function HomeScreen() {
       <View style={styles.gridWrapper}>
         <TouchableOpacity
           style={[styles.gridItem, { backgroundColor: Colors.pastel.orange }]}
+          onPress={() => navigateTo("/stock")}
         >
           <Text style={styles.itemText}> ESTOQUE </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.gridItem, { backgroundColor: Colors.pastel.blue }]}
+          onPress={() => navigateToProjects("/projects", "Concluídos")}
         >
           <Text style={styles.itemText}> PROJETOS CONCLUÍDOS </Text>
         </TouchableOpacity>

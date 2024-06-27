@@ -1,33 +1,27 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/components/useColorScheme';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Theme, ThemeProvider } from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+import "react-native-reanimated";
 
 export {
-  // Catch any errors thrown by the Layout component.
   ErrorBoundary,
-} from 'expo-router';
+} from "expo-router";
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
+  initialRouteName: "(tabs)",
 };
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
   }, [error]);
@@ -46,13 +40,28 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
   return (
     <ThemeProvider value={customTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+        <Stack.Screen
+          name="modal"
+          options={{ presentation: "fullScreenModal" }}
+        />
+        <Stack.Screen
+          name="projects"
+          options={{
+            headerTitle: "Projetos",
+            presentation: "fullScreenModal",
+          }}
+        />
+        <Stack.Screen
+          name="forms"
+          options={{
+            headerTitle: "Formulários",
+            presentation: "fullScreenModal",
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );
@@ -61,11 +70,11 @@ function RootLayoutNav() {
 const customTheme: Theme = {
   dark: true,
   colors: {
-    primary: '#D750C1',
-    background: '#A78DB8',
-    card: '#EBDCF4',
-    text: '#6D4886',
-    border: 'rgba(0, 0, 0, 0)',
-    notification: 'rgb(255, 69, 58)',
+    primary: "#D750C1",
+    background: "#A78DB8",
+    card: "#EBDCF4",
+    text: "#6D4886",
+    border: "rgba(0, 0, 0, 0)",
+    notification: "rgb(255, 69, 58)",
   },
 };
