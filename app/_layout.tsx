@@ -4,11 +4,10 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { StyleSheet } from "react-native";
 import "react-native-reanimated";
 
-export {
-  ErrorBoundary,
-} from "expo-router";
+export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",
@@ -51,14 +50,24 @@ function RootLayoutNav() {
         <Stack.Screen
           name="projects"
           options={{
-            headerTitle: "Projetos",
+            headerTitle: "PROJETOS",
+            headerTitleStyle: styles.modalHeader,
             presentation: "fullScreenModal",
           }}
         />
         <Stack.Screen
           name="forms"
           options={{
-            headerTitle: "Formulários",
+            headerTitle: "FORMULÁRIOS",
+            headerTitleStyle: styles.modalHeader,
+            presentation: "fullScreenModal",
+          }}
+        />
+        <Stack.Screen
+          name="stock"
+          options={{
+            headerTitle: "ESTOQUE",
+            headerTitleStyle: styles.modalHeader,
             presentation: "fullScreenModal",
           }}
         />
@@ -78,3 +87,11 @@ const customTheme: Theme = {
     notification: "rgb(255, 69, 58)",
   },
 };
+
+const styles = StyleSheet.create({
+  modalHeader: {
+    color: "#6D4886",
+    fontSize: 26,
+    fontFamily: "BigShouldersText-Regular",
+  },
+});

@@ -1,12 +1,7 @@
-import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import { Text, View } from "@/components/Themed";
-import { Link, SplashScreen, router, useNavigation } from "expo-router";
-import { useCallback, useEffect } from "react";
+import { SplashScreen, router, useNavigation } from "expo-router";
+import { useCallback } from "react";
 import { useFonts } from "expo-font";
 import Colors from "@/constants/Colors";
 
@@ -38,11 +33,11 @@ export default function HomeScreen() {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}> Acesso rápido </Text>
+      <Text style={styles.title}> ACESSO RÁPIDO </Text>
       <View style={styles.gridWrapper}>
         <TouchableOpacity
           style={[styles.gridItem, { backgroundColor: Colors.pastel.green }]}
-          onPress={() => navigateToProjects("/projects", "Ativos")}
+          onPress={() => navigateToProjects("/projects", "ATIVOS")}
         >
           <Text style={styles.itemText}> PROJETOS ATIVOS </Text>
         </TouchableOpacity>
@@ -65,13 +60,13 @@ export default function HomeScreen() {
 
         <TouchableOpacity
           style={[styles.gridItem, { backgroundColor: Colors.pastel.blue }]}
-          onPress={() => navigateToProjects("/projects", "Concluídos")}
+          onPress={() => navigateToProjects("/projects", "CONCLUÍDOS")}
         >
           <Text style={styles.itemText}> PROJETOS CONCLUÍDOS </Text>
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.title}> Notificações </Text>
+      <Text style={styles.title}> NOTIFICAÇÕES </Text>
       <View style={styles.notificationsWrapper}>
         <TouchableOpacity style={styles.notification}>
           <Text style={styles.notifText}> Notificação exemplo </Text>
@@ -89,7 +84,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 20,
     marginBottom: 5,
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "Quicksand-Regular",
   },
   gridWrapper: {
